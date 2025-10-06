@@ -53,7 +53,10 @@ public class EmpresaController {
         Optional<Empresa> empresaExistente = empresaRepository.findById(id);
         if (empresaExistente.isPresent()) {
             Empresa e = empresaExistente.get();
-            e.setNome(empresa.getNome());
+            // Se nome vier nulo do formulário, mantém o nome atual
+            if (empresa.getNome() != null) {
+                e.setNome(empresa.getNome());
+            }
             empresaRepository.save(e);
         }
         return "redirect:/empresas";

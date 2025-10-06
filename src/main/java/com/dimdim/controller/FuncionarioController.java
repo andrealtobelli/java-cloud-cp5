@@ -55,7 +55,10 @@ public class FuncionarioController {
             Funcionario f = funcionarioExistente.get();
             f.setNome(funcionario.getNome());
             f.setCargo(funcionario.getCargo());
-            f.setEmpresa(funcionario.getEmpresa());
+            // Se empresa vier nula do formulário, mantém a empresa atual
+            if (funcionario.getEmpresa() != null) {
+                f.setEmpresa(funcionario.getEmpresa());
+            }
             funcionarioRepository.save(f);
             return "redirect:/empresas/" + f.getEmpresa().getId() + "/funcionarios";
         }
