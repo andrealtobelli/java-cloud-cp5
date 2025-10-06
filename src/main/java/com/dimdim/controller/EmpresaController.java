@@ -50,8 +50,12 @@ public class EmpresaController {
 
     @PostMapping("/editar/{id}")
     public String atualizarEmpresa(@PathVariable Long id, @ModelAttribute Empresa empresa) {
-        empresa.setId(id);
-        empresaRepository.save(empresa);
+        Optional<Empresa> empresaExistente = empresaRepository.findById(id);
+        if (empresaExistente.isPresent()) {
+            Empresa e = empresaExistente.get();
+            e.setNome(empresa.getNome());
+            empresaRepository.save(e);
+        }
         return "redirect:/empresas";
     }
 

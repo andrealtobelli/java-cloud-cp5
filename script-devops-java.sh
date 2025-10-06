@@ -9,7 +9,7 @@ export RESOURCE_GROUP_NAME="rg-dimdim-cloud"
 export WEBAPP_NAME="dimdim-cloud-app"
 export APP_SERVICE_PLAN="planDimDimCloud"
 export LOCATION="brazilsouth"
-export RUNTIME="JAVA|17-java11"
+export RUNTIME="JAVA:17-java17"
 export GITHUB_REPO_NAME="andrealtobelli/java-cloud-cp5"
 export BRANCH="main"
 export APP_INSIGHTS_NAME="ai-dimdim-cloud"
@@ -203,4 +203,14 @@ az monitor app-insights component connect-webapp \
     --resource-group $RESOURCE_GROUP_NAME
 echo "[DimDim] Variáveis de ambiente configuradas e WebApp reiniciado. Application Insights conectado."
 
-echo "[DimDim] Deploy automatizado pronto! Para deploy, use Maven ou configure GitHub Actions conforme sua preferência."
+# ============================
+# DEPLOY VIA GITHUB ACTIONS
+# ============================
+az webapp deployment github-actions add \
+  --name $WEBAPP_NAME \
+  --resource-group $RESOURCE_GROUP_NAME \
+  --repo $GITHUB_REPO_NAME \
+  --branch $BRANCH \
+  --login-with-github
+
+echo "[DimDim] Deploy via GitHub Actions configurado com sucesso!"

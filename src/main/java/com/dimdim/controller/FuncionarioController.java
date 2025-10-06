@@ -50,9 +50,16 @@ public class FuncionarioController {
 
     @PostMapping("/editar/{id}")
     public String atualizarFuncionario(@PathVariable Long id, @ModelAttribute Funcionario funcionario) {
-        funcionario.setId(id);
-        funcionarioRepository.save(funcionario);
-        return "redirect:/empresas/" + funcionario.getEmpresa().getId() + "/funcionarios";
+        Optional<Funcionario> funcionarioExistente = funcionarioRepository.findById(id);
+        if (funcionarioExistente.isPresent()) {
+            Funcionario f = funcionarioExistente.get();
+            f.setNome(funcionario.getNome());
+            f.setCargo(funcionario.getCargo());
+            f.setEmpresa(funcionario.getEmpresa());
+            funcionarioRepository.save(f);
+            return "redirect:/empresas/" + f.getEmpresa().getId() + "/funcionarios";
+        }
+        return "redirect:/empresas";
     }
 
     @GetMapping("/excluir/{id}")
