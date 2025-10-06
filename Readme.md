@@ -111,10 +111,9 @@ O vídeo demonstrativo inclui:
 6. **Integração completa** entre App e Database funcionando 100%
 
 ### Link do Vídeo:
-**YouTube**: 
+**YouTube**: https://www.youtube.com/watch?v=5xebEB6SAzw
 
 ---
 
 **Desenvolvido para FIAP - DevOps Tools & Cloud Computing**  
 **Turma**: 3º Sprint - 2025
-# Java
